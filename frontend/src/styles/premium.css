@@ -1,0 +1,259 @@
+/* =====================================================
+   CivicFix PREMIUM layer (decorative polish only)
+   Load order: index.css -> layout.css -> premium.css
+
+   Rules for this file:
+   - no :root tokens (they live in layout.css)
+   - no font @import (it lives at the top of index.css)
+   - no layout/size changes (they live in layout.css)
+   - hover "lift" only on things you can actually click
+===================================================== */
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { letter-spacing: -0.02em; }
+
+::selection { background: var(--primary-light); color: var(--primary-hover); }
+
+/* ---------- Buttons ---------- */
+
+.primary-button,
+.secondary-button,
+.danger-button,
+.header-register,
+.hm-cta-button,
+.auth-button {
+  transition: transform var(--ease), box-shadow var(--ease), background var(--ease),
+    border-color var(--ease), color var(--ease);
+}
+
+/* Solid brand colour: the old gradient started at #14877d (4.38:1 with white, fails AA) */
+.primary-button,
+.header-register,
+.auth-button {
+  background: var(--primary);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 118, 110, 0.3);
+}
+
+.primary-button:hover:not(:disabled),
+.header-register:hover,
+.auth-button:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px -4px rgba(15, 118, 110, 0.4);
+}
+
+.primary-button:active:not(:disabled),
+.header-register:active,
+.auth-button:active:not(:disabled) {
+  background: var(--primary-active);
+  transform: none;
+}
+
+/* The white CTA button must stay visible on the teal band */
+.hm-cta-button { box-shadow: 0 6px 16px -4px rgba(15, 23, 42, 0.3); }
+.hm-cta-button:hover {
+  background: var(--primary-light);
+  color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.secondary-button,
+.icon-button,
+.complaint-card-link,
+.header-logout { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04); }
+
+.secondary-button:hover,
+.complaint-card-link:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+
+/* ---------- Headers ---------- */
+
+.site-header,
+.app-topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Glass blur only where it is cheap (desktop); phones keep a solid bar */
+@media (min-width: 1024px) and (hover: hover) {
+  .site-header,
+  .app-topbar {
+    background: rgba(255, 255, 255, 0.82);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    backdrop-filter: saturate(180%) blur(14px);
+  }
+}
+
+.site-nav-link { transition: background var(--ease), color var(--ease); }
+.site-nav-link:hover { background: var(--teal-soft); }
+.site-nav-link.active { background: var(--primary-light); }
+
+.logo-icon {
+  background: linear-gradient(135deg, #14b8a6 0%, #0f766e 100%);
+  box-shadow: 0 4px 10px -2px rgba(15, 118, 110, 0.45);
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar-link { transition: background var(--ease), color var(--ease); }
+
+/* ---------- Cards & panels ---------- */
+
+.panel,
+.stats-card,
+.complaint-card,
+.quick-card,
+.hm-category-card,
+.hm-service,
+.hm-contact-form,
+.admin-category {
+  box-shadow: var(--shadow);
+  transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease),
+    background var(--ease);
+}
+
+/* Only genuinely clickable cards lift: stat cards, complaint cards and
+   service cards are not links, so they must not look like buttons. */
+.quick-card:hover,
+.hm-category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: #99f6e4;
+}
+
+.complaint-card:hover,
+.hm-service:hover { border-color: #99f6e4; }
+
+.quick-card:hover { background: var(--teal-soft); }
+.panel-head h2 { font-size: 18px; font-weight: 700; }
+
+/* ---------- Status badges / complaint cards ---------- */
+
+.status { letter-spacing: 0.01em; }
+.complaint-card { padding: 14px; }
+.complaint-card-top h3 { font-weight: 700; }
+
+/* ---------- Filter chips ---------- */
+
+.filter-chip { transition: background var(--ease), border-color var(--ease), transform var(--ease); box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04); }
+.filter-chip:hover { background: var(--teal-soft); transform: translateY(-1px); }
+.filter-chip.active {
+  background: var(--primary);
+  box-shadow: 0 4px 10px -2px rgba(15, 118, 110, 0.4);
+}
+.filter-chip.active:hover { background: var(--primary-hover); }
+
+/* ---------- Forms (focus ring lives in layout.css / index.css) ---------- */
+
+.field input,
+.field select,
+.field textarea,
+.toolbar select,
+.search-box input,
+.input-wrapper input,
+.location-input input {
+  transition: border-color var(--ease), box-shadow var(--ease), background var(--ease);
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover,
+.input-wrapper input:hover { border-color: #94a3b8; }
+
+.upload-box { border-radius: var(--radius); background: linear-gradient(180deg, #f8fafc, #f1f5f9); }
+.upload-box:hover { background: var(--teal-soft); transform: translateY(-1px); box-shadow: var(--shadow); }
+
+/* ---------- Tables ---------- */
+
+.data-table th {
+  background: #f8fafc;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.data-table tbody tr { transition: background var(--ease); }
+.table-thumb { border-radius: 8px; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1); }
+
+/* ---------- Timeline, bars, FAQ ---------- */
+
+.timeline-step.done .timeline-dot { box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.14); }
+.bar-track { height: 10px; }
+.bar-fill { background: linear-gradient(90deg, #14b8a6, #0f766e); transition: width 0.4s ease; }
+.faq-item summary { transition: color var(--ease); }
+.faq-item summary:hover { color: var(--primary); }
+
+/* ---------- Home page ---------- */
+
+.hm-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 80% at 85% 10%, rgba(204, 251, 241, 0.75) 0%, rgba(204, 251, 241, 0) 70%),
+    radial-gradient(40% 60% at 0% 100%, rgba(240, 253, 250, 1) 0%, rgba(240, 253, 250, 0) 70%),
+    #ffffff;
+}
+
+.hm-hero-copy h1 { font-weight: 800; }
+.hm-hero-card { box-shadow: var(--shadow-hover); }
+
+.hm-icon {
+  background: linear-gradient(135deg, #ccfbf1, #99f6e4);
+  color: var(--primary-hover);
+  transition: transform var(--ease);
+}
+
+.hm-category-card:hover .hm-icon { transform: scale(1.06); }
+
+.hm-heading h2,
+.hm-about h2,
+.hm-contact h2 { font-weight: 800; letter-spacing: -0.03em; }
+
+.hm-cta {
+  background:
+    radial-gradient(50% 120% at 90% 0%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer { background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%); }
+
+/* ---------- Auth screens ---------- */
+
+.auth-page {
+  background:
+    radial-gradient(50% 60% at 100% 0%, rgba(204, 251, 241, 0.6) 0%, rgba(204, 251, 241, 0) 70%),
+    #f8fafc;
+}
+
+.auth-container { box-shadow: 0 30px 80px -20px rgba(15, 23, 42, 0.18); }
+
+.auth-brand-panel {
+  background:
+    radial-gradient(70% 50% at 0% 0%, rgba(20, 184, 166, 0.45) 0%, rgba(20, 184, 166, 0) 70%),
+    linear-gradient(160deg, #0f766e 0%, #0b5a54 100%);
+}
+
+.auth-header h2 { font-weight: 800; }
+
+/* ---------- Touch + reduced motion ---------- */
+
+@media (hover: none) {
+  .quick-card:hover,
+  .hm-category-card:hover,
+  .upload-box:hover,
+  .filter-chip:hover,
+  .secondary-button:hover,
+  .complaint-card-link:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-card:hover,
+  .hm-category-card:hover,
+  .primary-button:hover,
+  .auth-button:hover,
+  .header-register:hover,
+  .hm-cta-button:hover { transform: none !important; }
+}
